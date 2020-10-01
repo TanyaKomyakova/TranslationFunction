@@ -4,8 +4,8 @@ import lombok.val;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
-import ru.netology.web.page.DashboardPageMap1;
 import ru.netology.web.page.LoginPage;
+import ru.netology.web.page.TransferPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -29,9 +29,7 @@ public class MoneyTransferTest {
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        val cardSelectio = DashboardPage.class;
-        val fgdgd = DataHelper.getCardFirst(authInfo);
-
+        val shouldBeRefilled = DataHelper.getCard(authInfo);
 
 
     }

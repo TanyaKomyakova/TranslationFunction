@@ -6,18 +6,26 @@ import ru.netology.web.data.DataHelper;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class DashboardPageMap1 {
+public class TransferPage {
     private SelenideElement heading = $("[data-test-id=dashboard]");
-    private SelenideElement map1 = $("[data-test-id=92df3f1c-a033-48e6-8390-206f6b1f56c0]");
     private SelenideElement updateButton = $("[data-test-id=action-transfer]");
     private SelenideElement sum = $("[data-test-id=amount] input");
     private SelenideElement fromCard = $("[data-test-id=from] input");
 
+    public TransferPage(){
+        heading.shouldBe(Condition.visible);
+    }
 
-    public DashboardPage fromCard(DataHelper.CardFirst cardFirst){
-        map1.click();
+    public DashboardPage fromCard1(DataHelper.CardInfo cardInfo){
         sum.setValue("100");
-        fromCard.setValue(cardFirst.getFirst());
+        fromCard.setValue(cardInfo.getCardSecond());
+        updateButton.click();
+        return new DashboardPage();
+    }
+
+    public DashboardPage fromCard2(DataHelper.CardInfo cardInfo){
+        sum.setValue("100");
+        fromCard.setValue(cardInfo.getCardFirst());
         updateButton.click();
         return new DashboardPage();
     }
