@@ -22,18 +22,35 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void makeATransfer(){
+    void makeATransferCard1(){
         open("http://localhost:9999");
         val loginPage = new LoginPage();
 //    val loginPage = open("http://localhost:9999", LoginPageV2.class);
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        val shouldBeRefilled = DataHelper.getCard(authInfo);
-
+        val dashboardPage = verificationPage.validVerify(verificationCode);
+        val balanсe = dashboardPage.getCardBalance();
+        val transferPage = dashboardPage.map1();
+        val cardReplenishment = transferPage.fromCard1(DataHelper.getCard(authInfo));
+        val finalBalance = dashboardPage.getCardBalance();
 
     }
 
+    @Test
+    void makeATransferCard2(){
+        open("http://localhost:9999");
+        val loginPage = new LoginPage();
+//    val loginPage = open("http://localhost:9999", LoginPageV2.class);
+        val authInfo = DataHelper.getAuthInfo();
+        val verificationPage = loginPage.validLogin(authInfo);
+        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val dashboardPage = verificationPage.validVerify(verificationCode);
+        val balanсe = dashboardPage.getCardBalance();
+        val transferPage = dashboardPage.map2();
+        val cardReplenishment = transferPage.fromCard2(DataHelper.getCard(authInfo));
+        val finalBalance = dashboardPage.getCardBalance();
 
+    }
 
 }
