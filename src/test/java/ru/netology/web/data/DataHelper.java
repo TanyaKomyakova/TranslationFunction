@@ -33,7 +33,7 @@ public class DataHelper {
         private String cardSecond;
     }
 
-    public static CardInfo getCard(AuthInfo authInfo){
+    public static CardInfo getCard(){
         return new CardInfo("5559000000000001","5559000000000002");
     }
 }
