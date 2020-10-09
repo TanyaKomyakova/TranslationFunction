@@ -14,7 +14,7 @@ public class MoneyTransferTest {
 
     @Test
     void makeATransferCard1(){
-        val sum = 100;
+        val sum = 10000000;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
 //    val loginPage = open("http://localhost:9999", LoginPageV2.class);
@@ -24,7 +24,7 @@ public class MoneyTransferTest {
         val dashboardPage = verificationPage.validVerify(verificationCode);
         val balanсe = dashboardPage.getCardBalance1();
         val transferPage = dashboardPage.map1();
-        val cardReplenishment = transferPage.tranfserMoney(getCard().getCardSecond(),sum);
+        transferPage.tranfserMoney(getCard().getCardSecond(),sum);
         val finalBalance = dashboardPage.getCardBalance1();
 
 
@@ -32,6 +32,7 @@ public class MoneyTransferTest {
 
     @Test
     void makeATransferCard2(){
+        val sum = 100;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
 //    val loginPage = open("http://localhost:9999", LoginPageV2.class);
@@ -41,7 +42,7 @@ public class MoneyTransferTest {
         val dashboardPage = verificationPage.validVerify(verificationCode);
         val balanсe = dashboardPage.getCardBalance2();
         val transferPage = dashboardPage.map2();
-        val cardReplenishment = transferPage.tranfserMoney(getCard().getCardFirst(),sum);
+        transferPage.tranfserMoney(getCard().getCardFirst(),sum);
         val finalBalance = dashboardPage.getCardBalance2();
 
     }

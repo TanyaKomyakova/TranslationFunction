@@ -22,5 +22,4 @@ public class TransferPage {
         cardInput.setValue(cardNumber);
         updateButton.click();
     }
-
 }

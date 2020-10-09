@@ -46,7 +46,6 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-
     public TransferPage map1() {
         refillButtonCard1.click();
         return new TransferPage();
