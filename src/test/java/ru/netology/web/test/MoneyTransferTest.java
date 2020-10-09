@@ -14,7 +14,7 @@ public class MoneyTransferTest {
 
     @Test
     void makeATransferCard1(){
-        val sum = 10000000;
+        val sum = 15000;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
 //    val loginPage = open("http://localhost:9999", LoginPageV2.class);
@@ -32,7 +32,7 @@ public class MoneyTransferTest {
 
     @Test
     void makeATransferCard2(){
-        val sum = 100;
+        val sum = 1000000;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
 //    val loginPage = open("http://localhost:9999", LoginPageV2.class);
