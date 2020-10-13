@@ -24,12 +24,12 @@ public class MoneyTransferTest {
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         val dashboardPage = verificationPage.validVerify(verificationCode);
+        $("data-test-id=action-reload").shouldBe()
         val balanсe1 = dashboardPage.getCardBalance1();
         val balanсe2 = dashboardPage.getCardBalance2();
         val transferPage = dashboardPage.transferToCard1();
         transferPage.tranfserMoney(getCard().getCardSecond(),sum);
         val finalBalance = dashboardPage.getCardBalance1();
-        $("data-test-id=action-reload").click();
 
 
     }
