@@ -11,10 +11,9 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
     private SelenideElement heading = $("[data-test-id=dashboard]");
-    private SelenideElement refillButtonCard1 = $("[data-test-id=action-deposit]");
-    private SelenideElement refillButtonCard2 = $("[data-test-id=action-deposit]");
-    private ElementsCollection cards1 = $$(".list__item");
-    private ElementsCollection cards2 = $$(".list__item");
+    private SelenideElement refillButtonCard1 = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] [data-test-id='action-deposit']");
+    private SelenideElement refillButtonCard2 = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] [data-test-id='action-deposit']");
+    private ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
@@ -23,8 +22,8 @@ public class DashboardPage {
     }
 
     public int getCardBalance1() {
-        val text = cards1.first().text();
-        return extractBalance(text);
+        val text = cards.first().text();
+        return extractBalance1(text);
     }
 
     private int extractBalance1(String text) {
@@ -35,23 +34,23 @@ public class DashboardPage {
     }
 
     public int getCardBalance2() {
-        val text = cards2.first().text();
-        return extractBalance(text);
+        val text = cards.last().text();
+        return extractBalance2(text);
     }
 
-    private int extractBalance(String text) {
+    private int extractBalance2(String text) {
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
 
-    public TransferPage map1() {
+    public TransferPage transferToCard1 () {
         refillButtonCard1.click();
         return new TransferPage();
     }
 
-    public TransferPage map2() {
+    public TransferPage transferToCard2() {
         refillButtonCard2.click();
         return new TransferPage();
     }
