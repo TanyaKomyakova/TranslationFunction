@@ -10,6 +10,7 @@ import ru.netology.web.page.TransferPage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.web.data.DataHelper.getCard;
 
 public class MoneyTransferTest {
@@ -19,36 +20,60 @@ public class MoneyTransferTest {
         val sum = 15000;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
-//    val loginPage = open("http://localhost:9999", LoginPageV2.class);
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         val dashboardPage = verificationPage.validVerify(verificationCode);
-        $("data-test-id=action-reload").shouldBe()
-        val balanсe1 = dashboardPage.getCardBalance1();
-        val balanсe2 = dashboardPage.getCardBalance2();
+        val cardBalance1 = dashboardPage.getCardBalance1();
+        val cardBalance2 = dashboardPage.getCardBalance2();
         val transferPage = dashboardPage.transferToCard1();
         transferPage.tranfserMoney(getCard().getCardSecond(),sum);
-        val finalBalance = dashboardPage.getCardBalance1();
-
+        val updateСardBalance1 = dashboardPage.getCardBalance1();
+        val updateСardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(25000,updateСardBalance1);
+        assertEquals(-5000,updateСardBalance2);
 
     }
 
     @Test
     void makeATransferCard2(){
-        val sum = 1000000;
+        val sum = 15000;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
-//    val loginPage = open("http://localhost:9999", LoginPageV2.class);
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         val dashboardPage = verificationPage.validVerify(verificationCode);
+        val cardBalance1 = dashboardPage.getCardBalance1();
+        val cardBalance2 = dashboardPage.getCardBalance2();
         val balanсe = dashboardPage.getCardBalance2();
         val transferPage = dashboardPage.transferToCard2();
         transferPage.tranfserMoney(getCard().getCardFirst(),sum);
-        val finalBalance = dashboardPage.getCardBalance2();
+        val updateСardBalance1 = dashboardPage.getCardBalance1();
+        val updateСardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(10000,updateСardBalance1);
+        assertEquals(10000,updateСardBalance2);
 
+    }
+
+
+    @Test
+    void transfer1000000ToCard1(){
+        val sum = 1000000;
+        open("http://localhost:9999");
+        val loginPage = new LoginPage();
+        val authInfo = DataHelper.getAuthInfo();
+        val verificationPage = loginPage.validLogin(authInfo);
+        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val dashboardPage = verificationPage.validVerify(verificationCode);
+        val cardBalance1 = dashboardPage.getCardBalance1();
+        val cardBalance2 = dashboardPage.getCardBalance2();
+        val transferPage = dashboardPage.transferToCard1();
+        transferPage.tranfserMoney(getCard().getCardSecond(),sum);
+        val updateСardBalance1 = dashboardPage.getCardBalance1();
+        val updateСardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(1010000,updateСardBalance1);
+        assertEquals(-990000,updateСardBalance2);
     }
 
 }

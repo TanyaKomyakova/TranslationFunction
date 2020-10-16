@@ -55,5 +55,4 @@ public class DashboardPage {
         return new TransferPage();
     }
 
-
 }
