@@ -32,18 +32,18 @@ public class MoneyTransferTest {
         val cardBalance2 = dashboardPage.getCardBalance2();
         val transferPage = dashboardPage.transferToCard1();
         transferPage.tranfserMoney(getCard().getCardSecond(),sum);
-        val cardBalance1Expected = 12000;
-        val cardBalance2Expected = 8000;
-        val updateСardBalance1 = dashboardPage.getCardBalance1();
-        val updateСardBalance2 = dashboardPage.getCardBalance2();
-        assertEquals(cardBalance1Expected,updateСardBalance1);
-        assertEquals(cardBalance2Expected,updateСardBalance2);
+        val cardBalance1Expected = cardBalance1 + sum;
+        val cardBalance2Expected = cardBalance2 - sum;
+        val updateCardBalance1 = dashboardPage.getCardBalance1();
+        val updateCardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(cardBalance1Expected,updateCardBalance1);
+        assertEquals(cardBalance2Expected,updateCardBalance2);
     }
 
     @Test
     @Order(1)
     void makeATransferCard2(){
-        val sum = 1000;
+        int sum = 1000;
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
@@ -52,21 +52,19 @@ public class MoneyTransferTest {
         val dashboardPage = verificationPage.validVerify(verificationCode);
         val cardBalance1 = dashboardPage.getCardBalance1();
         val cardBalance2 = dashboardPage.getCardBalance2();
-        val balanсe = dashboardPage.getCardBalance2();
         val transferPage = dashboardPage.transferToCard2();
         transferPage.tranfserMoney(getCard().getCardFirst(),sum);
-        val cardBalance1Expected = 9000;
-        val cardBalance2Expected = 11000;
-        val updateСardBalance1 = dashboardPage.getCardBalance1();
-        val updateСardBalance2 = dashboardPage.getCardBalance2();
-        assertEquals(cardBalance1Expected,updateСardBalance1);
-        assertEquals(cardBalance2Expected,updateСardBalance2);
+        val cardBalance1Expected = cardBalance1 - sum;
+        val cardBalance2Expected = cardBalance2 + sum;
+        val updateCardBalance1 = dashboardPage.getCardBalance1();
+        val updateCardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(cardBalance1Expected,updateCardBalance1);
+        assertEquals(cardBalance2Expected,updateCardBalance2);
     }
 
     @Test
     @Order(3)
-    void transferOfTheAmountMoreThanTheBalance(){
-        val sum = 12001;
+    void transferOfTheAmountMoreThanTheBalanceOnTheCard1(){
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
@@ -75,21 +73,18 @@ public class MoneyTransferTest {
         val dashboardPage = verificationPage.validVerify(verificationCode);
         val cardBalance1 = dashboardPage.getCardBalance1();
         val cardBalance2 = dashboardPage.getCardBalance2();
-        val balanсe = dashboardPage.getCardBalance2();
+        val sum = Math.abs(cardBalance1) + 1;
         val transferPage = dashboardPage.transferToCard2();
         transferPage.tranfserMoney(getCard().getCardFirst(),sum);
-        val cardBalance1Expected = -1;
-        val cardBalance2Expected = 20001;
-        val updateСardBalance1 = dashboardPage.getCardBalance1();
-        val updateСardBalance2 = dashboardPage.getCardBalance2();
-        assertEquals(cardBalance1Expected,updateСardBalance1);
-        assertEquals(cardBalance2Expected,updateСardBalance2);
+        val updateCardBalance1 = dashboardPage.getCardBalance1();
+        val updateCardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(cardBalance1,updateCardBalance1);
+        assertEquals(cardBalance2,updateCardBalance2);
     }
 
     @Test
     @Order(4)
-    void transfer1000000ToCard1(){
-        val sum = 1000000;
+    void transferOfTheAmountMoreThanTheBalanceOnTheCard2() {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
@@ -98,14 +93,12 @@ public class MoneyTransferTest {
         val dashboardPage = verificationPage.validVerify(verificationCode);
         val cardBalance1 = dashboardPage.getCardBalance1();
         val cardBalance2 = dashboardPage.getCardBalance2();
+        val sum = Math.abs(cardBalance2) + 1;
         val transferPage = dashboardPage.transferToCard1();
-        transferPage.tranfserMoney(getCard().getCardSecond(),sum);
-        val cardBalance1Expected = -1;
-        val cardBalance2Expected = 20001;
-        val updateСardBalance1 = dashboardPage.getCardBalance1();
-        val updateСardBalance2 = dashboardPage.getCardBalance2();
-        assertEquals(cardBalance1Expected,updateСardBalance1);
-        assertEquals(cardBalance2Expected,updateСardBalance2);
+        transferPage.tranfserMoney(getCard().getCardSecond(), sum);
+        val updateCardBalance1 = dashboardPage.getCardBalance1();
+        val updateCardBalance2 = dashboardPage.getCardBalance2();
+        assertEquals(cardBalance1, updateCardBalance1);
+        assertEquals(cardBalance2, updateCardBalance2);
     }
-
 }
